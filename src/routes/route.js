@@ -8,6 +8,8 @@ router.post("/createBook", BookController.createBook  )
 
 router.get("/getChetanBhagat", BookController.getChetanBhagat)
 
-router.get("/getUpdate", BookController.authorBooks)
+router.put("/getUpdate", BookController.authorBooks)
+
+router.get("/bookPrice", BookController.bookNew)
 
 module.exports=router;

@@ -25,12 +25,29 @@ const getChetanBhagat= async function (req, res) {
 }
 //Assignment-3
 const authorBooks= async function (req, res) {
-    let data= await BookModel.find({name:"Two states"},{$set:{prices:100}},{new:true})
+    let data= await BookModel.findOneAndUpdate({bookName:"Two states"},{$set:{price:100}},{new:true})
 
-    let authorData= await AuthorModel.find({author_id:data[0].author_id}).select({author_name:1,_id:0})
+    let authorData= await AuthorModel.find({author_id:data.author_id}).select({author_name:1,_id:0})
     res.send({msg: authorData })
 }
+//Assignment-4
+const bookNew= async function (req, res) {
+    let bookRange= await BookModel.find({price:{$gt:50,$lte:100}})
+    let arr =[];
+    for(let i=0;i<bookRange.length;i++){
+        let id=bookRange[i].author_id;
+        let dataList = await AuthorModel.findOne({author_id:id})
+        let authorName = dataList.author_name
+        let bookName = bookRange.bookName
+        let rate =bookRange[i].price
+        let obj = {Name:authorName,Book:bookName,RS:rate}
+        arr.push(obj)
+    }
+    return res.send({Data:arr})
+}
+
 module.exports.createAuthor=createAuthor
 module.exports.createBook= createBook
 module.exports.getChetanBhagat= getChetanBhagat
 module.exports.authorBooks= authorBooks
+module.exports.bookNew= bookNew
