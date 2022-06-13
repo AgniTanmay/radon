@@ -28,6 +28,20 @@ const getBookDetails = async function(req, res){
     let allBooks = await BookModel.find().populate("author").populate("publisher")
     res.send({mgs: allBooks})
       }
+      
+  const mixedUp = async function(req, res){
+    let doaggregate = await BookModel.aggregate([{$group: { _id: "$Two states", totalQuantity: { $sum: "$price" } }}])
+    res.send({msg: doaggregate})
+  };
+
+//Assignment For Middleware
+const sadYep = async function(req, res){
+  console.log("I AM VERY SAD TODAY")
+  res.send("MY SWEETY IS ALSO SAD")
+}
 
 module.exports.createNewBook= createNewBook
 module.exports.getBookDetails = getBookDetails
+module.exports. mixedUp =  mixedUp
+module.exports. sadYep =  sadYep
+
