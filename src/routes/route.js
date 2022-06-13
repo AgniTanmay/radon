@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const AuthMiddleWare = require("../")
-
+const authMiddleWare = require("../")
 const authorController= require("../controllers/authorController")
 const bookController= require("../controllers/bookController")
 
@@ -17,6 +16,6 @@ router.post("/createNewBook", bookController.createNewBook)
 router.get("/getBookDetails", bookController.getBookDetails)
 
 //Assignment For Middleware
-router.get("/middlewaregf", AuthMiddleWare.md1, bookController.sadYep)
+router.get("/middlewaregf", authMiddleWare.md1, bookController.sadYep)
 
 module.exports = router;
